@@ -11,7 +11,8 @@ account_sid = 'AC96b6fb8f5123a5cea118f257611772d9'
 auth_token = 'd64859ba4cbff182edf85c2aefd0d6df'
 
 # Used https://www.alphavantage.co
-# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
+# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then Get News.
+
 parameters_alpha = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
@@ -42,8 +43,8 @@ day_before_yesterday_close = float(time_series[day_before_yesterday]["4. close"]
 percentage_difference = round(((yesterday_close - day_before_yesterday_close) / day_before_yesterday_close) * 100, 2)
 
 
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+# Used https://newsapi.org
+# Gets the first 3 news pieces for the COMPANY_NAME. 
 
 parametres_news = {
     "q": COMPANY_NAME,
@@ -58,8 +59,8 @@ three_articles = articles[:3]
 
 formates_articles_list = [f"{STOCK}: {'🔺' if percentage_difference > 0 else '🔻'}{percentage_difference} \nHeadline: {article['title']}. \nBrief: {article['description']}." for article in three_articles]
 
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
+# Used https://www.twilio.com
+# Sends a seperate message with the percentage change and each article's title and description to a chosen phone number. 
 
 if percentage_difference > 5 or percentage_difference < -5:
     
